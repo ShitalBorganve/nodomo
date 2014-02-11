@@ -29,6 +29,27 @@ if ('development' == app.get('env')) {
 
 app.get('/', routes.index);
 
+// 404 Error - Always keep this at the last route.
+app.use(function(req, res, next){
+  res.status(404);
+
+  // respond with html page
+  if (req.accepts('html')) {
+    res.render('404', { url: req.url });
+    return;
+  }
+
+  // respond with json
+  if (req.accepts('json')) {
+    res.send({ error: 'Not found' });
+    return;
+  }
+
+  // default to plain-text. send()
+  res.type('txt').send('Not found');
+});
+
+
 http.createServer(app).listen(app.get('port'), function(){
   console.log('INFOS:: Web Server now running on port "'+app.get('port')+'" check here => http://localhost:1337');
 });
