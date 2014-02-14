@@ -1,0 +1,56 @@
+{% extends 'layout.twig' %}
+
+{% block css%}
+  <link href="login.css" rel="stylesheet" type="text/css" />
+{% endblock %}
+
+{% block content %}
+
+	<div class="site-wrapper">
+
+      <div class="site-wrapper-inner">
+
+        <div class="cover-container">
+
+          <div class="masthead clearfix">
+            <div class="inner">
+              <h3 class="masthead-brand">Nodomo </h3>
+              <ul class="nav masthead-nav">
+                <li class="active"><a href="#">Formulaire de connection</a></li>
+               
+              </ul>
+            </div>
+          </div>
+
+          <div class="inner cover">
+            <h1 class="cover-heading">Bienvenue, veuillez vous connectez ...</h1>
+          	
+
+		      <form class="form-signin" role="form">
+		        
+		        <input type="email" class="form-control" placeholder="Votre login" required="" autofocus="">
+		        <input type="password" class="form-control" placeholder="Votre mot de passe" required="">
+		        <label class="checkbox">
+		          <input type="checkbox" value="remember-me"> Se souvenir de moi
+		        </label>
+		        <button class="btn btn-lg btn-default" type="submit">Me connecter</button>
+		      </form>
+
+		   
+            </p>
+          </div>
+
+          <!-- <div class="mastfoot">
+            <div class="inner">
+              <p></p>
+            </div>
+          </div> -->
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+{% endblock %}
