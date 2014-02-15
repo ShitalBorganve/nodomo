@@ -1,36 +1,23 @@
 /* 
 *	Routes 
 */
+module.exports.start = function(controllers, app){
+  var debug = "INFOS:: user connected on page ";
 
+  app.get('/', function(req, res){
+    console.log(debug + req.url);
+    controllers.index(req,res);
+  });
 
-var routes = function(app){
-  var controllers = require('../controllers');
+  app.get('/login', function(req, res){
+    console.log(debug + req.url);
+    controllers.login(req,res);
+  });
 
-  app.get('/', controllers.index);
-  app.get('/login', controllers.login);
-
-
-
-// 404 Error - Always keep this at the last route.
-app.use(function(req, res, next){
-  res.status(404);
-
-  // respond with html page
-  if (req.accepts('html')) {
-    res.render('404', { url: req.url });
-    return;
-  }
-
-  // respond with json
-  if (req.accepts('json')) {
-    res.send({ error: 'Not found' });
-    return;
-  }
-
-  // default to plain-text. send()
-  res.type('txt').send('Not found');
-});
+  // 404 Error - Always keep this at the last route.
+  app.use(function(req, res, next){
+     console.log(debug+ req.url +' (404 error page)');
+     controllers.error404(req,res);
+  });
 
 };
-
-module.exports = routes;

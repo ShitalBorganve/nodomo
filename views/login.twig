@@ -26,7 +26,7 @@
             <h1 class="cover-heading">Bienvenue, veuillez vous connectez ...</h1>
           	
 
-		      <form class="form-signin" role="form">
+		      <form id="login-form" class="form-signin" role="form">
 		        
 		        <input type="email" class="form-control" placeholder="Votre login" required="" autofocus="">
 		        <input type="password" class="form-control" placeholder="Votre mot de passe" required="">
@@ -52,5 +52,32 @@
 
     </div>
 
+
+{% endblock %}
+
+{% block scripts %}
+  <script type="text/javascript" src="http://localhost:1337/socket.io/socket.io.js"></script>
+  <script type="text/javascript">
+        //Client.js  — Client Node.js
+
+          (function($){
+
+            var socket = io.connect('http://localhost:1337');
+
+            //Recupere les info du Login Form
+            $('#login-form').submit(function(event){
+                event.preventDefault();
+                socket.emit('login', {
+                  username : $('input[type=email]').val(),
+                  mail   : $('input[type=password]').val()
+                })
+            })
+
+            socket.on('logged', function(){
+              alert("Vous êtes connecté !");
+            })
+          })(jQuery);
+
+  </script>
 
 {% endblock %}
