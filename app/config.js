@@ -3,6 +3,7 @@
  * Module dependencies.
  */
 
+//Server 
 var express = require('express'),
 	path = require('path'),
 	app = express(),
@@ -12,6 +13,9 @@ var express = require('express'),
 	controllers = require('../controllers'),
 	routes = require('./routes'),
 	httpServer = require('./server');
+
+//Interactions - Socket.IO
+var user = require('../src/userInteraction').connexionInteraction(io);
 
 exports.start = function(){
 

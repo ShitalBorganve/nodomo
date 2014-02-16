@@ -28,8 +28,8 @@
 
 		      <form id="login-form" class="form-signin" role="form">
 		        
-		        <input type="email" class="form-control" placeholder="Votre login" required="" autofocus="">
-		        <input type="password" class="form-control" placeholder="Votre mot de passe" required="">
+		        <input type="email" id="email" class="form-control" placeholder="Votre login" required="" autofocus="">
+		        <input type="password" id="password" class="form-control" placeholder="Votre mot de passe" required="">
 		        <label class="checkbox">
 		          <input type="checkbox" value="remember-me"> Se souvenir de moi
 		        </label>
@@ -59,22 +59,28 @@
   <script type="text/javascript" src="http://localhost:1337/socket.io/socket.io.js"></script>
   <script type="text/javascript">
         //Client.js  — Client Node.js
+          var root_path = 'http://localhost:1337';
 
           (function($){
 
-            var socket = io.connect('http://localhost:1337');
+            var socket = io.connect(root_path);
 
             //Recupere les info du Login Form
             $('#login-form').submit(function(event){
                 event.preventDefault();
                 socket.emit('login', {
-                  username : $('input[type=email]').val(),
-                  mail   : $('input[type=password]').val()
+                  mail : $('#email').val(),
+                  password   : $('#password').val()
                 })
             })
 
             socket.on('logged', function(){
-              alert("Vous êtes connecté !");
+                window.location.assign(root_path);
+             
+            })
+
+            socket.on('error_login', function(error){
+              alert("Wrong"+ error);
             })
           })(jQuery);
 

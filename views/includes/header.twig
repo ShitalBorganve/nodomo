@@ -1,11 +1,11 @@
 <!-- header logo: style can be found in header.less -->
         <header class="header">
-            <a href="/" class="logo">
+            <a href="/" class="logo bg-black">
                 <!-- Add the class icon to your logo image or logo icon to add the margining -->
                 NoDomo
             </a>
             <!-- Header Navbar: style can be found in header.less -->
-            <nav class="navbar navbar-static-top" role="navigation">
+            <nav class="navbar navbar-static-top bg-black" role="navigation">
                 <!-- Sidebar toggle button-->
                 <a href="#" class="navbar-btn sidebar-toggle" data-toggle="offcanvas" role="button">
                     <span class="sr-only">Navigation</span>
@@ -207,18 +207,22 @@
                         <li class="dropdown user user-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="glyphicon glyphicon-user"></i>
-                                <span>{{ user.firstname }} <i class="caret"></i></span>
+                                <span>{{ user.getfirstname }} <i class="caret"></i></span>
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- User image -->
-                                <li class="user-header bg-light-blue">
-                                    <img src="{{ user.picture }}" class="img-circle" alt="User Image" />
+                                <li class="user-header bg-black">
+                                    <img src="{{ user.getpicture }}" class="img-circle" alt="User Image" />
                                     <p>
-                                        {{ user.firstname }} - {{ user.lastname }}
-                                        <p>email: {{ user.mail }}</p>
-                                        <p>téléphone: {{ user.phone }}</p>
+                                        <p>{{ user.getfirstname }} - {{ user.getlastname }}</p>
+                                        <p>email: {{ user.getmail }}</p>
+                                        <p>téléphone: {{ user.getphone }}</p>
                                         <hr>
-                                        <small>Inscrit depuis {{ user.inscrit }} </small>
+                                        <small>Utilisateur(s) connecté(s): 
+                                            {% for user in userstab %}           
+                                                {{ user.getfirstname }}            
+                                            {% endfor %}
+                                        </small>
                                     </p>
                                 </li>
                                 <!-- Menu Body -->
@@ -236,7 +240,7 @@
                                 <!-- Menu Footer-->
                                 <li class="user-footer">
                                     <div class="pull-left">
-                                        <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                        <a href="#" class="btn btn-default btn-flat">Profil</a>
                                     </div>
                                     <div class="pull-right">
                                         <a href="#" class="btn btn-default btn-flat">Me déconnecter</a>

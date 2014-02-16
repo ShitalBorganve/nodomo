@@ -1,19 +1,14 @@
 /* 
 *	Routes 
 */
-module.exports.start = function(controllers, app){
+exports.start = function(controllers, app){
   var debug = "INFOS:: user connected on page ";
 
   app.get('/', function(req, res){
     console.log(debug + req.url);
     controllers.index(req,res);
   });
-
-  app.get('/login', function(req, res){
-    console.log(debug + req.url);
-    controllers.login(req,res);
-  });
-
+  
   // 404 Error - Always keep this at the last route.
   app.use(function(req, res, next){
      console.log(debug+ req.url +' (404 error page)');
