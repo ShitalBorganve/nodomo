@@ -1,25 +1,31 @@
 
 	var messages = [];
 	var history = 4;
-	
+
 module.exports = function(io,socket,mongoose){
 
+
+	for(var k in messages){
+		socket.emit('newmsg', messages[k]);
+	}
 
 
 	/* Live Chat */
 
-	/*
-	*	On a reçu un msg.
-	*/
-	socket.on('newmsg', function(message, user){
-		
-		
+	///// New message send by an user.
+	socket.on('newmsg', function(message){
+		var current_user;
+
+		//Get the message's user. (user of current socket)
+		socket.get('current_user', function(error, value){
+		   current_user = value;     
+        });
+
 		date = new Date();
 		message.h = date.getHours();
 		message.m = date.getMinutes();
-		message.user = findUser(user);
+		message.user = current_user;
 
-		console.log(message.user);
 
 		messages.push(message);
 
@@ -27,10 +33,8 @@ module.exports = function(io,socket,mongoose){
 			messages.shift();
 		}
 
+		//Send message to all users.
 		io.sockets.emit('newmsg', message);
 	});
 
-	
-
-};
 };

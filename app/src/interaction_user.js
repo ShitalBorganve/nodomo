@@ -11,6 +11,8 @@ module.exports = function(io,socket,mongoose){
 
 	////// New user inform he's connected.
 	socket.on('logged', function(user){
+		
+
 		me = user;
 		me.id = user.id;
 		//find user infos in database.
@@ -32,6 +34,8 @@ module.exports = function(io,socket,mongoose){
 						}
 					}
 
+					//Set socket's user.
+					socket.set('current_user', me);
 					//Inform other users of a new connected user.
 					socket.broadcast.emit('newusr', me, totalUsers()-1 );
 			});

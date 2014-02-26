@@ -40,6 +40,7 @@ console.log('Nodomo is running on port ' + port);
 io.sockets.on('connection', function(socket){
 	
 	var interaction_user = require('./app/src/interaction_user')(io,socket, mongoose);
+	var interaction_tchat = require('./app/src/interaction_tchat')(io,socket, mongoose);
 	
 });
 
